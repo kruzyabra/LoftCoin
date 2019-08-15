@@ -1,8 +1,10 @@
-package ru.pavlenko.julia;
+package ru.pavlenko.julia.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import ru.pavlenko.julia.R;
 
 public class MainActivity extends AppCompatActivity {
 
