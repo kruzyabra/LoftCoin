@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="512dp">
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <Button
+        android:layout_width="248dp"
+        android:layout_height="64dp"
+        app:cornerRadius="50dp"
+        android:background="@drawable/gradient_golden_yellow_watermelon"
+        android:text="Начать работу"/>
+
+</LinearLayout>
