@@ -6,13 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.constraint.Guideline
+        android:id="@+id/line_1"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="123dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/line_2"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="217dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="-115dp"
-        android:src="@drawable/artboard_2"
+        android:layout_marginEnd="8dp"
         android:alpha=".80"
-        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/artboard_2"
+        app:layout_constraintEnd_toStartOf="@+id/line_1"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -38,15 +52,14 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingEnd="-190dp"
-        android:paddingBottom="-100dp"
+        android:alpha=".80"
         android:scaleType="center"
         android:src="@drawable/artboard"
-        android:alpha=".80"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
