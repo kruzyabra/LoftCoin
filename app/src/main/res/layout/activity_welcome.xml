@@ -19,6 +19,6 @@
         android:layout_gravity="center_horizontal"
         app:cornerRadius="50dp"
         android:background="@drawable/gradient_golden_yellow_watermelon"
-        android:text="Начать работу"/>
+        android:text="@string/welcome_button_text"/>
 
 </LinearLayout>
