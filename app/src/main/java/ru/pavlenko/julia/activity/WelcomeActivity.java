@@ -11,10 +11,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import me.relex.circleindicator.CircleIndicator;
 import ru.pavlenko.julia.R;
 import ru.pavlenko.julia.ViewPagerAdapter;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +24,9 @@ public class WelcomeActivity extends AppCompatActivity {
 
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(new ViewPagerAdapter(getLayoutInflater()));
+
+        CircleIndicator circleIndicator = findViewById(R.id.circle_indicator);
+        circleIndicator.setViewPager(viewPager);
 
         Button welcomeButton = findViewById(R.id.welcome_button);
         welcomeButton.setOnClickListener(new View.OnClickListener() {

@@ -8,15 +8,25 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="415dp">
+        android:layout_height="350dp">
 
     </androidx.viewpager.widget.ViewPager>
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/circle_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        app:ci_drawable="@drawable/tab_indicator_selected"
+        app:ci_drawable_unselected="@drawable/tab_indicator_default"/>
 
     <Button
         android:id="@+id/welcome_button"
         android:layout_width="248dp"
         android:layout_height="64dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="64dp"
         app:cornerRadius="50dp"
         android:background="@drawable/gradient_golden_yellow_watermelon"
         android:text="@string/welcome_button_text"/>
