@@ -6,14 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/line_1"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="123dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/line_2"
         android:orientation="horizontal"
         app:layout_constraintGuide_end="217dp"
