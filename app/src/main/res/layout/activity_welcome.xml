@@ -3,18 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
+    android:layout_height="match_parent">
 
     <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="512dp">
+        android:layout_height="415dp">
 
     </androidx.viewpager.widget.ViewPager>
 
     <Button
+        android:id="@+id/welcome_button"
         android:layout_width="248dp"
         android:layout_height="64dp"
+        android:layout_gravity="center_horizontal"
         app:cornerRadius="50dp"
         android:background="@drawable/gradient_golden_yellow_watermelon"
         android:text="Начать работу"/>
