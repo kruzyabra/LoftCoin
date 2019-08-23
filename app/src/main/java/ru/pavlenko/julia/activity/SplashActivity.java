@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import ru.pavlenko.julia.R;
+import ru.pavlenko.julia.Settings;
+import ru.pavlenko.julia.SettingsImpl;
 
 public class SplashActivity extends AppCompatActivity {
     @Override
@@ -17,12 +19,12 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        final SharedPreferences sharedPreferences =  PreferenceManager.getDefaultSharedPreferences(this);
+        final Settings settings = new SettingsImpl(this);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (sharedPreferences.getBoolean("show_welcome_screen", true)) {
+                if (settings.shouldShowWelcomeScreen()) {
                     Intent intent = new Intent(SplashActivity.this, WelcomeActivity.class);
                     startActivity(intent);
                 }
