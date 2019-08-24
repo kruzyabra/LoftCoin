@@ -32,6 +32,6 @@ public class ConverterFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mMainModelView.setTitle(getResources().getString(R.string.rate));
+        mMainModelView.setTitle(getResources().getString(R.string.converter));
     }
 }
