@@ -1,4 +1,4 @@
-package ru.pavlenko.julia;
+package ru.pavlenko.julia.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
