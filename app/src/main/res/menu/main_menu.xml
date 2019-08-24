@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/wallets"
-        android:title="Кошельки"
+        android:title="@string/wallets"
         android:icon="@drawable/ic_wallet"/>
 
     <item
         android:id="@+id/rate"
-        android:title="Курс"
+        android:title="@string/rate"
         android:icon="@drawable/ic_rate"/>
 
     <item
         android:id="@+id/converter"
-        android:title="Конвертер"
+        android:title="@string/converter"
         android:icon="@drawable/ic_converter"/>
 
 </menu>
