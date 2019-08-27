@@ -25,4 +25,6 @@
     <color name="dark_seven">#10101a</color>
     <color name="blue_grey">#9c9eb9</color>
     <color name="white">#ffffff</color>
+    <color name="rate_green">#3de77b</color>
+    <color name="rate_red">#ff4464</color>
 </resources>
