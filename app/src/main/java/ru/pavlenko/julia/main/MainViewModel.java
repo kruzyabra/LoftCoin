@@ -1,4 +1,4 @@
-package ru.pavlenko.julia.model;
+package ru.pavlenko.julia.main;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

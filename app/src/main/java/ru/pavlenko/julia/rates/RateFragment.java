@@ -1,4 +1,4 @@
-package ru.pavlenko.julia.fragment;
+package ru.pavlenko.julia.rates;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import ru.pavlenko.julia.R;
-import ru.pavlenko.julia.model.MainViewModel;
+import ru.pavlenko.julia.main.MainViewModel;
 
 public class RateFragment extends Fragment {
 
