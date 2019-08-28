@@ -43,7 +43,7 @@
         tools:text="@sample/coincap.json/data/quote/USD/price"/>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/coin_change"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"

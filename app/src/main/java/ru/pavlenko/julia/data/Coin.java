@@ -11,4 +11,15 @@ public class Coin {
 
     @SerializedName("quote") private Map<String, Quote> quotes;
 
+    public int getId() {
+        return id;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public Map<String, Quote> getQuotes() {
+        return quotes;
+    }
 }
