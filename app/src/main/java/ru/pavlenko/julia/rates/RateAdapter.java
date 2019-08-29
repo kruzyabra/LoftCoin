@@ -17,13 +17,22 @@ import java.util.List;
 
 import ru.pavlenko.julia.R;
 import ru.pavlenko.julia.data.Coin;
+import ru.pavlenko.julia.data.Currencies;
 import ru.pavlenko.julia.data.Quote;
 import ru.pavlenko.julia.util.ImgUrlGetterImpl;
 
 public class RateAdapter extends RecyclerView.Adapter<RateAdapter.RateViewHolder> {
     private List<Coin> coins = new ArrayList<>();
 
+    private String convert;
+
     public RateAdapter() {
+        convert = Currencies.getDefault().getCurrencySymbol();
+
+    }
+
+    public void setConvert(String convert) {
+        this.convert = convert;
     }
 
     public void setCoins(List<Coin> coins) {
