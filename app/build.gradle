@@ -15,7 +15,8 @@ android {
         versionName "1.0"
 
         buildConfigField "String", "CMC_API_KEY", "\"${coinMarketCapKey}\""
-        buildConfigField "String", "CMC_BASE_URL", '"https://pro-api.coinmarketcap.com/v1"'
+        buildConfigField "String", "CMC_BASE_URL", '"https://pro-api.coinmarketcap.com/v1/"'
+        buildConfigField "String", "CMC_IMG_URL", '"https://s2.coinmarketcap.com/static/img/"'
     }
 
     buildTypes {
@@ -45,4 +46,5 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:2.6.1"
     implementation "com.squareup.okhttp3:okhttp:4.1.0"
     implementation "com.squareup.okhttp3:logging-interceptor:4.1.0"
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

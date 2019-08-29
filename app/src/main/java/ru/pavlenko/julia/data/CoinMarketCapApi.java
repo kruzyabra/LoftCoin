@@ -11,5 +11,5 @@ public interface CoinMarketCapApi {
     String KEY ="CMC_PRO_API_KEY";
 
     @GET("cryptocurrency/listings/latest")
-    Call<List<Coin>> getCoins(@Query(KEY) String coinMarketCapKey, @Query("convert") String covert);
+    Call<Listing> getCoins(@Query(KEY) String coinMarketCapKey, @Query("convert") String covert);
 }

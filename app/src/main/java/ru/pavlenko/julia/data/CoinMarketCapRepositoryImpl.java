@@ -12,6 +12,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ru.pavlenko.julia.BuildConfig;
+import ru.pavlenko.julia.util.Consumer;
 
 class CoinMarketCapRepositoryImpl implements CoinMarketCapRepository{
     private static final CoinMarketCapRepositoryImpl ourInstance = new CoinMarketCapRepositoryImpl();
@@ -41,17 +42,18 @@ class CoinMarketCapRepositoryImpl implements CoinMarketCapRepository{
     }
 
     @Override
-    public void getListing(String convert, List<Coin> coins) {
+    public void getListing(String convert, Consumer<List<Coin>> coins) {
         mApi.getCoins(BuildConfig.CMC_API_KEY, convert)
-                .enqueue(new Callback<List<Coin>>() {
+                .enqueue(new Callback<Listing>() {
                     @Override
-                    public void onResponse(Call<List<Coin>> call, Response<List<Coin>> response) {
+                    public void onResponse(Call<Listing> call, Response<Listing> response) {
+                        Listing listing = response.body();
 
+                        coins.apply(listing.getData());
                     }
 
                     @Override
-                    public void onFailure(Call<List<Coin>> call, Throwable t) {
-
+                    public void onFailure(Call<Listing> call, Throwable t) {
                     }
                 });
     }
