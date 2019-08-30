@@ -1,6 +1,8 @@
 package ru.pavlenko.julia.rates;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import ru.pavlenko.julia.R;
 import ru.pavlenko.julia.data.Currencies;
+import ru.pavlenko.julia.data.Currency;
 
 public class CurrencyDialog extends DialogFragment {
     static final String TAG = "CurrencyDialog";
@@ -51,7 +54,11 @@ public class CurrencyDialog extends DialogFragment {
         mAdapter.setOnItemClick(new CurrencyAdapter.OnItemClick() {
             @Override
             public void onItemClick(Currencies currency, int position) {
+                Currency currencySettings = Currency.get(getParentFragment().getContext());
+                currencySettings.setCurrentCurrency(currency);
+
                 mRateViewModel.updateCurrency(currency);
+
                 dismissAllowingStateLoss();
             }
         });

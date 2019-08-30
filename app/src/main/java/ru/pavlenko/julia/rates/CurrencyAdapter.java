@@ -31,7 +31,8 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
 
     @Override
     public void onBindViewHolder(@NonNull CurrencyViewHolder holder, int position) {
-        holder.bind(Currencies.values()[position]);
+        Currencies currency = Currencies.values()[position];
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +41,22 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
                 }
             }
         });
+
+        holder.mCurrencySign.setText(currency.getCurrencySign());
+        holder.mCurrencyName.setText(String.format(Locale.US,
+                "%s | %s",
+                holder.itemView.getContext().getString(currency.getCurrencyName()),
+                currency.getCurrencySymbol()));
+
+        holder.mCurrencySign.setOutlineProvider(new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+                outline.setRoundRect(0, 0,
+                        view.getWidth(), view.getHeight(),
+                        view.getWidth() / 2);
+            }
+        });
+        holder.mCurrencySign.setClipToOutline(true);
     }
 
     @Override
@@ -55,24 +72,6 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
             super(itemView);
             mCurrencySign = itemView.findViewById(R.id.currency_sign);
             mCurrencyName = itemView.findViewById(R.id.currency_name);
-        }
-
-        public void bind(Currencies currency) {
-            mCurrencySign.setText(currency.getCurrencySign());
-            mCurrencyName.setText(String.format(Locale.US,
-                    "%s | %s",
-                    this.itemView.getContext().getString(currency.getCurrencyName()),
-                    currency.getCurrencySymbol()));
-
-            mCurrencySign.setOutlineProvider(new ViewOutlineProvider() {
-                @Override
-                public void getOutline(View view, Outline outline) {
-                    outline.setRoundRect(0, 0,
-                            view.getWidth(), view.getHeight(),
-                            view.getWidth() / 2);
-                }
-            });
-            mCurrencySign.setClipToOutline(true);
         }
     }
 
