@@ -37,7 +37,7 @@ public class RateFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mMainModelView = ViewModelProviders.of(requireActivity()).get(MainViewModel.class);
         mRateViewModel = ViewModelProviders.of(requireActivity()).get(RateViewModel.class);
-        mRateAdapter = new RateAdapter();
+        mRateAdapter = new RateAdapter(this.getContext());
     }
 
     @Nullable

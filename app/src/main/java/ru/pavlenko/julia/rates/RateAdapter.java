@@ -1,6 +1,9 @@
 package ru.pavlenko.julia.rates;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Outline;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
@@ -18,21 +21,20 @@ import java.util.List;
 import ru.pavlenko.julia.R;
 import ru.pavlenko.julia.data.Coin;
 import ru.pavlenko.julia.data.Currencies;
+import ru.pavlenko.julia.data.Currency;
 import ru.pavlenko.julia.data.Quote;
 import ru.pavlenko.julia.util.ImgUrlGetterImpl;
 
 public class RateAdapter extends RecyclerView.Adapter<RateAdapter.RateViewHolder> {
+    private Context mContext;
+
     private List<Coin> coins = new ArrayList<>();
 
-    private String convert;
+    public RateAdapter(Context context) {
+        mContext = context;
 
-    public RateAdapter() {
-        convert = Currencies.getDefault().getCurrencySymbol();
-
-    }
-
-    public void setConvert(String convert) {
-        this.convert = convert;
+        Currency currency = Currency.get(mContext);
+        currency.setCurrentCurrency(Currencies.getDefault());
     }
 
     public void setCoins(List<Coin> coins) {
@@ -49,7 +51,27 @@ public class RateAdapter extends RecyclerView.Adapter<RateAdapter.RateViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull RateViewHolder holder, int position) {
-        holder.bind(coins.get(position));
+        Coin coin = coins.get(position);
+
+        Currency currency = Currency.get(mContext);
+
+        Quote quote = coin.getQuotes().get(currency.getCurrentCurrency());
+
+        Picasso.get().load(new ImgUrlGetterImpl().getUrl(coin.getId())).into(holder.mCoinIcon);
+
+        holder.mCoinName.setText(coin.getSymbol());
+        holder.mCoinRate.setText(quote.getPrice());
+        holder.mCoinChange.setText(quote.getChange24h());
+
+        holder.mCoinIcon.setOutlineProvider(new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+                outline.setRoundRect(0, 0,
+                        view.getWidth(), view.getHeight(),
+                        view.getWidth() / 2);
+            }
+        });
+        holder.mCoinIcon.setClipToOutline(true);
     }
 
     @Override
@@ -72,26 +94,6 @@ public class RateAdapter extends RecyclerView.Adapter<RateAdapter.RateViewHolder
             mCoinChange = itemView.findViewById(R.id.coin_change);
 
             mCoinIcon = itemView.findViewById(R.id.coin_icon);
-        }
-
-        public void bind(Coin coin) {
-            Quote quote = coin.getQuotes().get("USD");
-
-            Picasso.get().load(new ImgUrlGetterImpl().getUrl(coin.getId())).into(mCoinIcon);
-
-            mCoinName.setText(coin.getSymbol());
-            mCoinRate.setText(quote.getPrice());
-            mCoinChange.setText(quote.getChange24h());
-
-            mCoinIcon.setOutlineProvider(new ViewOutlineProvider() {
-                @Override
-                public void getOutline(View view, Outline outline) {
-                    outline.setRoundRect(0, 0,
-                            view.getWidth(), view.getHeight(),
-                            view.getWidth() / 2);
-                }
-            });
-            mCoinIcon.setClipToOutline(true);
         }
     }
 }
