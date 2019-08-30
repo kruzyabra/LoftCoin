@@ -1,4 +1,4 @@
-package ru.pavlenko.julia.activity;
+package ru.pavlenko.julia.welcome;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +11,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import me.relex.circleindicator.CircleIndicator;
 import ru.pavlenko.julia.R;
+import ru.pavlenko.julia.main.MainActivity;
 import ru.pavlenko.julia.util.Settings;
 import ru.pavlenko.julia.util.SettingsImpl;
-import ru.pavlenko.julia.ViewPagerAdapter;
 
 public class WelcomeActivity extends AppCompatActivity{
     @Override

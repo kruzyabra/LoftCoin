@@ -13,6 +13,10 @@ android {
 
         versionCode 1
         versionName "1.0"
+
+        buildConfigField "String", "CMC_API_KEY", "\"${coinMarketCapKey}\""
+        buildConfigField "String", "CMC_BASE_URL", '"https://pro-api.coinmarketcap.com/v1/"'
+        buildConfigField "String", "CMC_IMG_URL", '"https://s2.coinmarketcap.com/static/img/"'
     }
 
     buildTypes {
@@ -20,6 +24,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 }
 
@@ -34,4 +42,9 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata:2.0.0'
     implementation 'androidx.fragment:fragment:1.1.0-rc04'
+    implementation "com.squareup.retrofit2:retrofit:2.6.1"
+    implementation "com.squareup.retrofit2:converter-gson:2.6.1"
+    implementation "com.squareup.okhttp3:okhttp:4.1.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.1.0"
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

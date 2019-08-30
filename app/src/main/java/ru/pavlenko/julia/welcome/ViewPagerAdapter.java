@@ -1,4 +1,4 @@
-package ru.pavlenko.julia;
+package ru.pavlenko.julia.welcome;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.Objects;
+
+import ru.pavlenko.julia.R;
 
 public class ViewPagerAdapter extends PagerAdapter {
     private final static int[] IMAGES = {

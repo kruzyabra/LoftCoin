@@ -1,4 +1,4 @@
-package ru.pavlenko.julia.activity;
+package ru.pavlenko.julia.main;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,16 +10,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.collection.SparseArrayCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import ru.pavlenko.julia.R;
-import ru.pavlenko.julia.fragment.ConverterFragment;
-import ru.pavlenko.julia.fragment.RateFragment;
-import ru.pavlenko.julia.fragment.WalletFragment;
-import ru.pavlenko.julia.model.MainViewModel;
+import ru.pavlenko.julia.converter.ConverterFragment;
+import ru.pavlenko.julia.rates.RateFragment;
+import ru.pavlenko.julia.wallets.WalletFragment;
 
 public class MainActivity extends AppCompatActivity {
 

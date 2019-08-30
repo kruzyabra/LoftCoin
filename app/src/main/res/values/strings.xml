@@ -9,7 +9,21 @@
     <string name="welcome_subtitle_2">Следи за курсом валют и вовремя реагируй на изменения динамики цены.</string>
     <string name="welcome_subtitle_3">Узнай сколько эфира в одном биткоине.</string>
     <string name="welcome_button_text">Начать работу</string>
+
     <string name="wallets">Кошельки</string>
     <string name="rate">Курс</string>
     <string name="converter">Конвертер</string>
+
+    <string name="usd_name">Dollar</string>
+    <string name="usd_symbol">USD</string>
+    <string name="usd_sign">$</string>
+    <string name="eur_name">Euro</string>
+    <string name="eur_symbol">EUR</string>
+    <string name="eur_sign">€</string>
+    <string name="rub_name">Rouble</string>
+    <string name="rub_symbol">RUB</string>
+    <string name="rub_sign">₽</string>
+
+    <string name="change_currency">Валюта</string>
+    <string name="currency_choice">Выбор валюты</string>
 </resources>
