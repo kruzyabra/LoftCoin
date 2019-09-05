@@ -12,11 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import ru.pavlenko.julia.R;
 import ru.pavlenko.julia.data.Currencies;
 
 public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder> {
     private OnItemClick mListener;
+
+    @Inject
+    public CurrencyAdapter() {
+    }
 
     @NonNull
     @Override

@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import javax.inject.Inject;
+
 import ru.pavlenko.julia.R;
 import ru.pavlenko.julia.data.CoinMarketCapRepository;
 import ru.pavlenko.julia.data.Currencies;
@@ -22,19 +24,22 @@ import ru.pavlenko.julia.data.Currency;
 public class CurrencyDialog extends DialogFragment {
     static final String TAG = "CurrencyDialog";
 
-    private CurrencyAdapter mAdapter;
+    @Inject CurrencyAdapter mAdapter;
 
     private RateViewModel mRateViewModel;
 
-    private CoinMarketCapRepository mRepository;
+    @Inject CoinMarketCapRepository mRepository;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mRepository = CoinMarketCapRepository.get();
+        DaggerRateComponent.builder()
+                .rateFragment((RateFragment) getParentFragment())
+                .build()
+                .inject(this);
+
         RateFactory rateFactory = new RateFactory(mRepository);
-        mAdapter = new CurrencyAdapter();
         mRateViewModel = ViewModelProviders
                 .of(getParentFragment().requireActivity(), rateFactory)
                 .get(RateViewModel.class);

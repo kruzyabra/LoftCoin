@@ -18,6 +18,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import ru.pavlenko.julia.R;
 import ru.pavlenko.julia.data.Coin;
 import ru.pavlenko.julia.data.Currencies;
@@ -30,6 +32,7 @@ public class RateAdapter extends RecyclerView.Adapter<RateAdapter.RateViewHolder
 
     private List<Coin> coins = new ArrayList<>();
 
+    @Inject
     public RateAdapter(Context context) {
         mContext = context;
 
