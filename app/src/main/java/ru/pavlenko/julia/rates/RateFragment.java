@@ -20,6 +20,7 @@ import java.util.List;
 
 import ru.pavlenko.julia.R;
 import ru.pavlenko.julia.data.Coin;
+import ru.pavlenko.julia.data.CoinMarketCapRepository;
 import ru.pavlenko.julia.main.MainViewModel;
 
 public class RateFragment extends Fragment {
@@ -32,11 +33,16 @@ public class RateFragment extends Fragment {
 
     private RateViewModel mRateViewModel;
 
+    private CoinMarketCapRepository mRepository;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mRepository = CoinMarketCapRepository.get();
+        RateFactory rateFactory = new RateFactory(mRepository);
         mMainModelView = ViewModelProviders.of(requireActivity()).get(MainViewModel.class);
-        mRateViewModel = ViewModelProviders.of(requireActivity()).get(RateViewModel.class);
+        mRateViewModel = ViewModelProviders.of(requireActivity(), rateFactory).get(RateViewModel.class);
         mRateAdapter = new RateAdapter(this.getContext());
     }
 

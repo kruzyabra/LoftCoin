@@ -20,8 +20,8 @@ public class RateViewModel extends ViewModel {
 
     private Currencies mCurrency;
 
-    public RateViewModel() {
-        mRepository = CoinMarketCapRepository.get();
+    public RateViewModel(CoinMarketCapRepository repository) {
+        mRepository = repository;
         mCurrency = Currencies.getDefault();
         refresh();
     }

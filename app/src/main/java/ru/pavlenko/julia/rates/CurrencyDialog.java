@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ru.pavlenko.julia.R;
+import ru.pavlenko.julia.data.CoinMarketCapRepository;
 import ru.pavlenko.julia.data.Currencies;
 import ru.pavlenko.julia.data.Currency;
 
@@ -25,12 +26,17 @@ public class CurrencyDialog extends DialogFragment {
 
     private RateViewModel mRateViewModel;
 
+    private CoinMarketCapRepository mRepository;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mRepository = CoinMarketCapRepository.get();
+        RateFactory rateFactory = new RateFactory(mRepository);
         mAdapter = new CurrencyAdapter();
         mRateViewModel = ViewModelProviders
-                .of(getParentFragment().requireActivity())
+                .of(getParentFragment().requireActivity(), rateFactory)
                 .get(RateViewModel.class);
     }
 
