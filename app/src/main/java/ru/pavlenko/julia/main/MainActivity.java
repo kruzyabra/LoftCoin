@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import javax.inject.Inject;
+
 import ru.pavlenko.julia.R;
 import ru.pavlenko.julia.converter.ConverterFragment;
 import ru.pavlenko.julia.rates.RateFragment;
@@ -21,19 +23,18 @@ import ru.pavlenko.julia.wallets.WalletFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final SparseArrayCompat<Fragment> FRAGMENTS;
-
-    static {
-        FRAGMENTS = new SparseArrayCompat<>();
-        FRAGMENTS.put(R.id.wallets, new WalletFragment());
-        FRAGMENTS.put(R.id.rate, new RateFragment());
-        FRAGMENTS.put(R.id.converter, new ConverterFragment());
-    }
+    @Inject
+    MainNavigator mMainNavigator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DaggerMainComponent.builder()
+                .fragmentActivity(this)
+                .build()
+                .inject(this);
 
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,10 +60,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getSelectedId().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer selectedId) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, FRAGMENTS.get(selectedId))
-                        .commit();
-
+                mMainNavigator.changeFragment(selectedId);
             }
         });
 
