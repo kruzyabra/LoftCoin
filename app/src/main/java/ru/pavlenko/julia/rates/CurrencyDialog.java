@@ -30,6 +30,8 @@ public class CurrencyDialog extends DialogFragment {
 
     @Inject CoinMarketCapRepository mRepository;
 
+    @Inject Currency mCurrency;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +67,7 @@ public class CurrencyDialog extends DialogFragment {
         mAdapter.setOnItemClick(new CurrencyAdapter.OnItemClick() {
             @Override
             public void onItemClick(Currencies currency, int position) {
-                Currency currencySettings = Currency.get(getParentFragment().getContext());
+                Currency currencySettings = mCurrency;
                 currencySettings.setCurrentCurrency(currency);
 
                 mRateViewModel.updateCurrency(currency);

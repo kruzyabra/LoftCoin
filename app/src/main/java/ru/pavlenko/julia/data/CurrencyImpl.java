@@ -5,13 +5,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import javax.inject.Inject;
+
 class CurrencyImpl implements Currency {
     private final static String KEY = "currency_code";
 
     private SharedPreferences mPref;
 
-
-    public CurrencyImpl(Context context) {
+    @Inject
+    CurrencyImpl(Context context) {
         mPref = PreferenceManager.getDefaultSharedPreferences(context);
     }
 

@@ -49,7 +49,6 @@ public class RateFragment extends Fragment {
         RateFactory rateFactory = new RateFactory(mRepository);
         mMainModelView = ViewModelProviders.of(requireActivity()).get(MainViewModel.class);
         mRateViewModel = ViewModelProviders.of(requireActivity(), rateFactory).get(RateViewModel.class);
-        mRateAdapter = new RateAdapter(this.getContext());
     }
 
     @Nullable

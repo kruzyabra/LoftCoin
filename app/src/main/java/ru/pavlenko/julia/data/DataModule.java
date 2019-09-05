@@ -1,5 +1,7 @@
 package ru.pavlenko.julia.data;
 
+import android.content.Context;
+
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
@@ -39,5 +41,10 @@ public class DataModule {
     @Provides
     static CoinMarketCapRepository repository(CoinMarketCapApi api) {
         return new CoinMarketCapRepositoryImpl(api);
+    }
+
+    @Provides
+    static Currency currency(Context context) {
+        return new CurrencyImpl(context);
     }
 }
