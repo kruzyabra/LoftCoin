@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 import ru.pavlenko.julia.R;
 
-public class MainNavigator {
+class MainNavigator {
     private final FragmentActivity mMainActivity;
 
     private final SparseArrayCompat<Fragment> mFragments;
