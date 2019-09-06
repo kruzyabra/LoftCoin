@@ -18,8 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import ru.pavlenko.julia.R;
 import ru.pavlenko.julia.data.Coin;
+import ru.pavlenko.julia.data.CoinMarketCapRepository;
 import ru.pavlenko.julia.main.MainViewModel;
 
 public class RateFragment extends Fragment {
@@ -28,16 +31,23 @@ public class RateFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
 
-    private RateAdapter mRateAdapter;
+    @Inject RateAdapter mRateAdapter;
 
     private RateViewModel mRateViewModel;
+
+    @Inject RateFactory mRateFactory;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        DaggerRateComponent.builder()
+                .rateFragment(this)
+                .build()
+                .inject(this);
+
         mMainModelView = ViewModelProviders.of(requireActivity()).get(MainViewModel.class);
-        mRateViewModel = ViewModelProviders.of(requireActivity()).get(RateViewModel.class);
-        mRateAdapter = new RateAdapter(this.getContext());
+        mRateViewModel = ViewModelProviders.of(requireActivity(), mRateFactory).get(RateViewModel.class);
     }
 
     @Nullable

@@ -14,23 +14,37 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import javax.inject.Inject;
+
 import ru.pavlenko.julia.R;
+import ru.pavlenko.julia.data.CoinMarketCapRepository;
 import ru.pavlenko.julia.data.Currencies;
 import ru.pavlenko.julia.data.Currency;
 
 public class CurrencyDialog extends DialogFragment {
     static final String TAG = "CurrencyDialog";
 
-    private CurrencyAdapter mAdapter;
+    @Inject CurrencyAdapter mAdapter;
 
     private RateViewModel mRateViewModel;
+
+    @Inject RateFactory mRateFactory;
+
+    @Inject CoinMarketCapRepository mRepository;
+
+    @Inject Currency mCurrency;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAdapter = new CurrencyAdapter();
+
+        DaggerRateComponent.builder()
+                .rateFragment((RateFragment) getParentFragment())
+                .build()
+                .inject(this);
+
         mRateViewModel = ViewModelProviders
-                .of(getParentFragment().requireActivity())
+                .of(getParentFragment().requireActivity(), mRateFactory)
                 .get(RateViewModel.class);
     }
 
@@ -54,7 +68,7 @@ public class CurrencyDialog extends DialogFragment {
         mAdapter.setOnItemClick(new CurrencyAdapter.OnItemClick() {
             @Override
             public void onItemClick(Currencies currency, int position) {
-                Currency currencySettings = Currency.get(getParentFragment().getContext());
+                Currency currencySettings = mCurrency;
                 currencySettings.setCurrentCurrency(currency);
 
                 mRateViewModel.updateCurrency(currency);

@@ -18,6 +18,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import ru.pavlenko.julia.R;
 import ru.pavlenko.julia.data.Coin;
 import ru.pavlenko.julia.data.Currencies;
@@ -28,12 +30,15 @@ import ru.pavlenko.julia.util.ImgUrlGetterImpl;
 public class RateAdapter extends RecyclerView.Adapter<RateAdapter.RateViewHolder> {
     private Context mContext;
 
+    private Currency mCurrency;
+
     private List<Coin> coins = new ArrayList<>();
 
-    public RateAdapter(Context context) {
+    @Inject
+    public RateAdapter(Context context, Currency currency) {
         mContext = context;
 
-        Currency currency = Currency.get(mContext);
+        mCurrency = currency;
         currency.setCurrentCurrency(Currencies.getDefault());
     }
 
@@ -53,7 +58,7 @@ public class RateAdapter extends RecyclerView.Adapter<RateAdapter.RateViewHolder
     public void onBindViewHolder(@NonNull RateViewHolder holder, int position) {
         Coin coin = coins.get(position);
 
-        Currency currency = Currency.get(mContext);
+        Currency currency = mCurrency;
 
         Quote quote = coin.getQuotes().get(currency.getCurrentCurrency());
 

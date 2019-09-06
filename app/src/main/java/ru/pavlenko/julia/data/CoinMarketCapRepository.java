@@ -6,10 +6,6 @@ import ru.pavlenko.julia.util.Consumer;
 
 public interface CoinMarketCapRepository {
 
-    static CoinMarketCapRepository get() {
-        return CoinMarketCapRepositoryImpl.getInstance();
-    }
-
     void getListing(String concert, Consumer<List<Coin>> coins);
 
 }
