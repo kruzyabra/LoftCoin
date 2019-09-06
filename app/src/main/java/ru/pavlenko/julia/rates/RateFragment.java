@@ -35,7 +35,7 @@ public class RateFragment extends Fragment {
 
     private RateViewModel mRateViewModel;
 
-    @Inject CoinMarketCapRepository mRepository;
+    @Inject RateFactory mRateFactory;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,9 +46,8 @@ public class RateFragment extends Fragment {
                 .build()
                 .inject(this);
 
-        RateFactory rateFactory = new RateFactory(mRepository);
         mMainModelView = ViewModelProviders.of(requireActivity()).get(MainViewModel.class);
-        mRateViewModel = ViewModelProviders.of(requireActivity(), rateFactory).get(RateViewModel.class);
+        mRateViewModel = ViewModelProviders.of(requireActivity(), mRateFactory).get(RateViewModel.class);
     }
 
     @Nullable

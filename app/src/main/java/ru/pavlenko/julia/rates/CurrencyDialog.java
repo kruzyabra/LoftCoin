@@ -28,6 +28,8 @@ public class CurrencyDialog extends DialogFragment {
 
     private RateViewModel mRateViewModel;
 
+    @Inject RateFactory mRateFactory;
+
     @Inject CoinMarketCapRepository mRepository;
 
     @Inject Currency mCurrency;
@@ -41,9 +43,8 @@ public class CurrencyDialog extends DialogFragment {
                 .build()
                 .inject(this);
 
-        RateFactory rateFactory = new RateFactory(mRepository);
         mRateViewModel = ViewModelProviders
-                .of(getParentFragment().requireActivity(), rateFactory)
+                .of(getParentFragment().requireActivity(), mRateFactory)
                 .get(RateViewModel.class);
     }
 
