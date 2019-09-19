@@ -22,18 +22,17 @@ import javax.inject.Inject;
 
 import ru.pavlenko.julia.R;
 import ru.pavlenko.julia.data.Coin;
-import ru.pavlenko.julia.data.CoinMarketCapRepository;
 import ru.pavlenko.julia.main.MainViewModel;
 
 public class RateFragment extends Fragment {
 
-    private MainViewModel mMainModelView;
+    @Inject MainViewModel mMainModelView;
 
     private RecyclerView mRecyclerView;
 
     @Inject RateAdapter mRateAdapter;
 
-    private RateViewModel mRateViewModel;
+    @Inject RateViewModel mRateViewModel;
 
     @Inject RateFactory mRateFactory;
 
@@ -46,8 +45,7 @@ public class RateFragment extends Fragment {
                 .build()
                 .inject(this);
 
-        mMainModelView = ViewModelProviders.of(requireActivity()).get(MainViewModel.class);
-        mRateViewModel = ViewModelProviders.of(requireActivity(), mRateFactory).get(RateViewModel.class);
+        //mMainModelView = ViewModelProviders.of(requireActivity()).get(MainViewModel.class);
     }
 
     @Nullable

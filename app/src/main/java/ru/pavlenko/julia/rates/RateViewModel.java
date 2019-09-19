@@ -5,14 +5,16 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import ru.pavlenko.julia.data.Coin;
-import ru.pavlenko.julia.data.CoinMarketCapRepository;
+import ru.pavlenko.julia.data.CoinRepository;
 import ru.pavlenko.julia.data.Currencies;
 import ru.pavlenko.julia.util.Consumer;
 
 public class RateViewModel extends ViewModel {
 
-    private CoinMarketCapRepository mRepository;
+    private CoinRepository mRepository;
 
     private final MutableLiveData<List<Coin>> mCoins = new MutableLiveData<>();
 
@@ -20,7 +22,8 @@ public class RateViewModel extends ViewModel {
 
     private Currencies mCurrency;
 
-    public RateViewModel(CoinMarketCapRepository repository) {
+    @Inject
+    RateViewModel(CoinRepository repository) {
         mRepository = repository;
         mCurrency = Currencies.getDefault();
         refresh();

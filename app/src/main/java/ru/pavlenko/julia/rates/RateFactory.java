@@ -6,13 +6,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import javax.inject.Inject;
 
-import ru.pavlenko.julia.data.CoinMarketCapRepository;
+import ru.pavlenko.julia.data.CoinRepository;
 
 public class RateFactory implements ViewModelProvider.Factory {
-    private CoinMarketCapRepository mRepository;
+    private CoinRepository mRepository;
 
     @Inject
-    RateFactory(CoinMarketCapRepository repository) {
+    RateFactory(CoinRepository repository) {
         mRepository = repository;
     }
 

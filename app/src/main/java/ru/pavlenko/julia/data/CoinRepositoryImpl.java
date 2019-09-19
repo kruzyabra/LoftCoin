@@ -1,27 +1,21 @@
 package ru.pavlenko.julia.data;
 
-import android.widget.Toast;
-
 import java.util.List;
 
 import javax.inject.Inject;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import ru.pavlenko.julia.BuildConfig;
 import ru.pavlenko.julia.util.Consumer;
 
-class CoinMarketCapRepositoryImpl implements CoinMarketCapRepository{
+class CoinRepositoryImpl implements CoinRepository {
 
     private CoinMarketCapApi mApi;
 
     @Inject
-    CoinMarketCapRepositoryImpl(CoinMarketCapApi api) {
+    CoinRepositoryImpl(CoinMarketCapApi api) {
         mApi = api;
     }
 

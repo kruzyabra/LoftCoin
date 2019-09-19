@@ -5,8 +5,7 @@ import dagger.Component;
 import ru.pavlenko.julia.data.DataModule;
 
 @Component(modules = {
-        RateModule.class,
-        DataModule.class
+        RateModule.class
 })
 interface RateComponent {
 

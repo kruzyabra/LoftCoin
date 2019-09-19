@@ -2,6 +2,7 @@ package ru.pavlenko.julia.data;
 
 import android.content.Context;
 
+import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
@@ -11,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import ru.pavlenko.julia.BuildConfig;
 
 @Module
-public class DataModule {
+public interface DataModule {
 
     @Provides
     static HttpLoggingInterceptor httpLoggingInterceptor() {
@@ -38,13 +39,9 @@ public class DataModule {
         return retrofit.create(CoinMarketCapApi.class);
     }
 
-    @Provides
-    static CoinMarketCapRepository repository(CoinMarketCapApi api) {
-        return new CoinMarketCapRepositoryImpl(api);
-    }
+    @Binds
+    CoinRepository repository(CoinRepositoryImpl coinRepository);
 
-    @Provides
-    static Currency currency(Context context) {
-        return new CurrencyImpl(context);
-    }
+    @Binds
+    Currency currency(CurrencyImpl currency);
 }

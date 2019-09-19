@@ -4,7 +4,7 @@ import java.util.List;
 
 import ru.pavlenko.julia.util.Consumer;
 
-public interface CoinMarketCapRepository {
+public interface CoinRepository {
 
     void getListing(String concert, Consumer<List<Coin>> coins);
 

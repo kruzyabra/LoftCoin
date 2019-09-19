@@ -7,6 +7,8 @@ import ru.pavlenko.julia.log.DebugTree;
 import timber.log.Timber;
 
 public class LoftApp extends Application {
+    private AppComponent mAppComponent;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -16,5 +18,11 @@ public class LoftApp extends Application {
             Timber.plant(new DebugTree());
         }
         Timber.d("%s", this);
+
+        this.mAppComponent = DaggerAppComponent.factory().create(this);
+    }
+
+    public AppComponent getAppComponent() {
+        return this.mAppComponent;
     }
 }
