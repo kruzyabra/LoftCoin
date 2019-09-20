@@ -1,9 +1,8 @@
 package ru.pavlenko.julia.rates;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Outline;
-import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
@@ -37,7 +36,6 @@ public class RateAdapter extends RecyclerView.Adapter<RateAdapter.RateViewHolder
     @Inject
     public RateAdapter(Context context, Currency currency) {
         mContext = context;
-
         mCurrency = currency;
         currency.setCurrentCurrency(Currencies.getDefault());
     }
@@ -49,8 +47,7 @@ public class RateAdapter extends RecyclerView.Adapter<RateAdapter.RateViewHolder
     @NonNull
     @Override
     public RateViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = View.inflate(parent.getContext(), R.layout.item_rate, null);
-
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_rate, parent, false);
         return new RateViewHolder(itemView);
     }
 
@@ -77,6 +74,13 @@ public class RateAdapter extends RecyclerView.Adapter<RateAdapter.RateViewHolder
             }
         });
         holder.mCoinIcon.setClipToOutline(true);
+
+        if (position % 2 == 0) {
+            holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.dark_three));
+        }
+        else {
+            holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.dark_two));
+        }
     }
 
     @Override

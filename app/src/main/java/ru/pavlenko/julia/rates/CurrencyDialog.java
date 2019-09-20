@@ -42,9 +42,9 @@ public class CurrencyDialog extends DialogFragment {
                 .build()
                 .inject(this);
 
-        //mRateViewModel = ViewModelProviders
-        //        .of(getParentFragment().requireActivity(), mRateFactory)
-        //        .get(RateViewModel.class);
+        mRateViewModel = ViewModelProviders
+                .of(getParentFragment().requireActivity(), mRateFactory)
+                .get(RateViewModel.class);
     }
 
     @Override

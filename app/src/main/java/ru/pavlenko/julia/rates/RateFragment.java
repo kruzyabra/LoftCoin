@@ -44,8 +44,6 @@ public class RateFragment extends Fragment {
                 .rateFragment(this)
                 .build()
                 .inject(this);
-
-        //mMainModelView = ViewModelProviders.of(requireActivity()).get(MainViewModel.class);
     }
 
     @Nullable
