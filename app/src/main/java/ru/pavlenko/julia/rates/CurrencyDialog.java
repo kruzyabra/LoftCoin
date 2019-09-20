@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,12 +25,11 @@ public class CurrencyDialog extends DialogFragment {
 
     @Inject CurrencyAdapter mAdapter;
 
-    @Inject RateViewModel mRateViewModel;
+    @Inject ViewModelProvider.Factory mVmFactory;
 
-    @Inject RateFactory mRateFactory;
+    private RateViewModel mRateViewModel;
 
-    @Inject
-    CoinRepository mRepository;
+    @Inject CoinRepository mRepository;
 
     @Inject Currency mCurrency;
 
@@ -43,7 +43,7 @@ public class CurrencyDialog extends DialogFragment {
                 .inject(this);
 
         mRateViewModel = ViewModelProviders
-                .of(getParentFragment().requireActivity(), mRateFactory)
+                .of(getParentFragment(), mVmFactory)
                 .get(RateViewModel.class);
     }
 

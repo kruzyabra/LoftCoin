@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
+import dagger.multibindings.ClassKey;
+import dagger.multibindings.IntoMap;
 import ru.pavlenko.julia.AppComponent;
 import ru.pavlenko.julia.data.CoinRepository;
 import ru.pavlenko.julia.data.Currency;
@@ -36,8 +38,12 @@ public interface RateModule {
     }
 
     @Binds
+    @IntoMap
+    @ClassKey(RateViewModel.class)
     ViewModel rateViewModel(RateViewModel rateViewModel);
 
     @Binds
+    @IntoMap
+    @ClassKey(MainViewModel.class)
     ViewModel mainViewModel(MainViewModel mainViewModel);
 }

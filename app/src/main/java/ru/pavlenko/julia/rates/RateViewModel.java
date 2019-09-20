@@ -12,7 +12,6 @@ import ru.pavlenko.julia.data.Coin;
 import ru.pavlenko.julia.data.CoinRepository;
 import ru.pavlenko.julia.data.Currencies;
 import ru.pavlenko.julia.util.Consumer;
-import timber.log.Timber;
 
 public class RateViewModel extends ViewModel {
 
@@ -36,19 +35,8 @@ public class RateViewModel extends ViewModel {
             @Override
             public void apply(List<Coin> value) {
                 mCoins.postValue(value);
-                Timber.d("apply");
             }
         });
-        Timber.d("refresh");
-        //При смене валют почему-то не меняется значаение mCoins
-    }
-
-    public void setCoins(List<Coin> coins) {
-        mCoins.postValue(coins);
-    }
-
-    public void setTitle(String title) {
-        mTitle.postValue(title);
     }
 
     public MutableLiveData<List<Coin>> getCoins() {
@@ -58,6 +46,5 @@ public class RateViewModel extends ViewModel {
     void updateCurrency(Currencies currency) {
         mCurrency = currency;
         refresh();
-        Timber.d("updateCurrency");
     }
 }
