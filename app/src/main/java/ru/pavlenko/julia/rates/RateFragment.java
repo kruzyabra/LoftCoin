@@ -24,6 +24,7 @@ import javax.inject.Inject;
 
 import ru.pavlenko.julia.R;
 import ru.pavlenko.julia.data.Coin;
+import ru.pavlenko.julia.db.CoinEntity;
 import ru.pavlenko.julia.main.MainViewModel;
 
 public class RateFragment extends Fragment {
@@ -71,10 +72,10 @@ public class RateFragment extends Fragment {
         mRecyclerView.setAdapter(mRateAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mRateViewModel.getCoins().observe(this, new Observer<List<Coin>>() {
+        mRateViewModel.getCoinEntities().observe(this, new Observer<List<CoinEntity>>() {
             @Override
-            public void onChanged(List<Coin> coins) {
-                mRateAdapter.setCoins(coins);
+            public void onChanged(List<CoinEntity> coinEntities) {
+                mRateAdapter.setCoinEntities(coinEntities);
                 mRateAdapter.notifyDataSetChanged();
             }
         });

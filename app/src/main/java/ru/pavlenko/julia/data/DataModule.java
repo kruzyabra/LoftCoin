@@ -2,6 +2,8 @@ package ru.pavlenko.julia.data;
 
 import android.content.Context;
 
+import java.util.concurrent.Executors;
+
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
@@ -17,7 +19,7 @@ public interface DataModule {
     @Provides
     static HttpLoggingInterceptor httpLoggingInterceptor() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-        httpLoggingInterceptor.level(HttpLoggingInterceptor.Level.BODY);
+        httpLoggingInterceptor.level(HttpLoggingInterceptor.Level.HEADERS);
         return httpLoggingInterceptor;
     }
 
@@ -33,6 +35,7 @@ public interface DataModule {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BuildConfig.CMC_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .callbackExecutor(Executors.newFixedThreadPool(4))
                 .client(okHttpClient)
                 .build();
 
