@@ -1,8 +1,5 @@
 package ru.pavlenko.julia.data;
 
-import androidx.lifecycle.LiveData;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,31 +19,27 @@ class CoinRepositoryImpl implements CoinRepository {
 
     private LoftDb mLoftDb;
 
+    private DataConverter mDataConverter;
+
     @Inject
     CoinRepositoryImpl(CoinMarketCapApi api,
-                       LoftDb loftDb) {
+                       LoftDb loftDb,
+                       DataConverter dataConverter) {
         mApi = api;
         mLoftDb = loftDb;
+        mDataConverter = dataConverter;
     }
 
     @Override
-    public void getListingCoinEntities(String convert, Consumer<List<CoinEntity>> coins) {
+    public void getListing(String convert, Consumer<List<CoinEntity>> coins) {
 
-        Timber.d("THREAD_LOG: " + Thread.currentThread().toString());
         mApi.getCoins(BuildConfig.CMC_API_KEY, convert)
                 .enqueue(new Callback<Listing>() {
                     @Override
                     public void onResponse(Call<Listing> call, Response<Listing> response) {
-                        Timber.d("THREAD_LOG: " + Thread.currentThread().toString());
                         Listing listing = response.body();
 
-                        List<Coin> listCoins = listing.getData();
-                        List<CoinEntity> coinEntities = new ArrayList<>();
-                        for (Coin coin : listCoins) {
-                            Quote quote = coin.getQuotes().get(convert);
-                            CoinEntity coinEntity = new CoinEntity(coin.getId(), coin.getSymbol(), quote.getPrice(), quote.getChange24h());
-                            coinEntities.add(coinEntity);
-                        }
+                        List<CoinEntity> coinEntities =  mDataConverter.convertCoins(listing.getData(), convert);
 
                         coins.apply(coinEntities);
                     }
@@ -58,20 +51,15 @@ class CoinRepositoryImpl implements CoinRepository {
     }
 
     @Override
-    public LiveData<List<CoinEntity>> listings() {
-        Timber.d("THREAD_LOG: " + Thread.currentThread().toString());
+    public List<CoinEntity> listings() {
         return mLoftDb.coins().fetchAll();
     }
 
     @Override
     public void refresh(String convert) {
-        Timber.d("THREAD_LOG: " + Thread.currentThread().toString());
-
-        getListingCoinEntities(convert, new Consumer<List<CoinEntity>>() {
+        getListing(convert, new Consumer<List<CoinEntity>>() {
             @Override
             public void apply(List<CoinEntity> coins) {
-                Timber.d("THREAD_LOG: " + Thread.currentThread().toString());
-
                 mLoftDb.coins().insertAll(coins);
             }
         });

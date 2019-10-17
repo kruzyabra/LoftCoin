@@ -47,4 +47,7 @@ public interface DataModule {
 
     @Binds
     Currency currency(CurrencyImpl currency);
+
+    @Binds
+    DataConverter dataConverter(DataConverterImpl dataConverter);
 }

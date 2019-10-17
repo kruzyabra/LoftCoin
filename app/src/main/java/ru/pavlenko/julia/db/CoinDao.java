@@ -12,7 +12,7 @@ import java.util.List;
 public interface CoinDao {
 
     @Query("SELECT * FROM coins")
-    LiveData<List<CoinEntity>> fetchAll();
+    List<CoinEntity> fetchAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<CoinEntity> coins);

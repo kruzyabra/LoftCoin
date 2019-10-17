@@ -22,6 +22,10 @@ public interface AppModule {
     @Provides
     @Singleton
     static LoftDb loftDb(Context context) {
-        return Room.databaseBuilder(context, LoftDb.class, "loft_database").build();
+        return Room.databaseBuilder(context, LoftDb.class, "loft_database")
+                // remove ++
+                .allowMainThreadQueries()
+                // remove --
+                .build();
     }
 }
