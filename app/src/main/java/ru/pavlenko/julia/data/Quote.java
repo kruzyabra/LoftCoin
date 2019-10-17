@@ -22,4 +22,12 @@ public class Quote {
                 .setScale(2, RoundingMode.UP)
                 .doubleValue());
     }
+
+    public void setPrice(String price) {
+        this.price = Double.valueOf(price);
+    }
+
+    public void setChange24h(String change24h) {
+        this.change24h = Double.valueOf(change24h);
+    }
 }

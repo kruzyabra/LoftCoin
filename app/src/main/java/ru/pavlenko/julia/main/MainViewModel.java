@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import javax.inject.Inject;
+
 import ru.pavlenko.julia.R;
 
 public class MainViewModel extends ViewModel {
@@ -12,6 +14,7 @@ public class MainViewModel extends ViewModel {
 
     private final MutableLiveData<Integer> mSelectedId = new MutableLiveData<>();
 
+    @Inject
     public MainViewModel() {
         mSelectedId.postValue(R.id.wallets);
     }

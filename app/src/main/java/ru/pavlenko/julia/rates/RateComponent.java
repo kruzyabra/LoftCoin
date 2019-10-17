@@ -3,10 +3,11 @@ package ru.pavlenko.julia.rates;
 import dagger.BindsInstance;
 import dagger.Component;
 import ru.pavlenko.julia.data.DataModule;
+import ru.pavlenko.julia.vm.ViewModelModule;
 
 @Component(modules = {
         RateModule.class,
-        DataModule.class
+        ViewModelModule.class
 })
 interface RateComponent {
 

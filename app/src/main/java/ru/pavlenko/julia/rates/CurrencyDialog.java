@@ -1,8 +1,6 @@
 package ru.pavlenko.julia.rates;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import javax.inject.Inject;
 
 import ru.pavlenko.julia.R;
-import ru.pavlenko.julia.data.CoinMarketCapRepository;
+import ru.pavlenko.julia.data.CoinRepository;
 import ru.pavlenko.julia.data.Currencies;
 import ru.pavlenko.julia.data.Currency;
 
@@ -26,11 +25,11 @@ public class CurrencyDialog extends DialogFragment {
 
     @Inject CurrencyAdapter mAdapter;
 
+    @Inject ViewModelProvider.Factory mVmFactory;
+
     private RateViewModel mRateViewModel;
 
-    @Inject RateFactory mRateFactory;
-
-    @Inject CoinMarketCapRepository mRepository;
+    @Inject CoinRepository mRepository;
 
     @Inject Currency mCurrency;
 
@@ -44,7 +43,7 @@ public class CurrencyDialog extends DialogFragment {
                 .inject(this);
 
         mRateViewModel = ViewModelProviders
-                .of(getParentFragment().requireActivity(), mRateFactory)
+                .of(getParentFragment(), mVmFactory)
                 .get(RateViewModel.class);
     }
 

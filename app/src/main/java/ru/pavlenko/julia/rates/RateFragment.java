@@ -7,11 +7,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +24,7 @@ import javax.inject.Inject;
 
 import ru.pavlenko.julia.R;
 import ru.pavlenko.julia.data.Coin;
-import ru.pavlenko.julia.data.CoinMarketCapRepository;
+import ru.pavlenko.julia.db.CoinEntity;
 import ru.pavlenko.julia.main.MainViewModel;
 
 public class RateFragment extends Fragment {
@@ -35,7 +37,7 @@ public class RateFragment extends Fragment {
 
     private RateViewModel mRateViewModel;
 
-    @Inject RateFactory mRateFactory;
+    @Inject ViewModelProvider.Factory mVmFactory;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,8 +48,13 @@ public class RateFragment extends Fragment {
                 .build()
                 .inject(this);
 
-        mMainModelView = ViewModelProviders.of(requireActivity()).get(MainViewModel.class);
-        mRateViewModel = ViewModelProviders.of(requireActivity(), mRateFactory).get(RateViewModel.class);
+        mMainModelView = ViewModelProviders
+                .of(requireActivity(), mVmFactory)
+                .get(MainViewModel.class);
+
+        mRateViewModel = ViewModelProviders
+                .of(this, mVmFactory)
+                .get(RateViewModel.class);
     }
 
     @Nullable
@@ -65,10 +72,10 @@ public class RateFragment extends Fragment {
         mRecyclerView.setAdapter(mRateAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mRateViewModel.getCoins().observe(this, new Observer<List<Coin>>() {
+        mRateViewModel.getCoinEntities().observe(this, new Observer<List<CoinEntity>>() {
             @Override
-            public void onChanged(List<Coin> coins) {
-                mRateAdapter.setCoins(coins);
+            public void onChanged(List<CoinEntity> coinEntities) {
+                mRateAdapter.setCoinEntities(coinEntities);
                 mRateAdapter.notifyDataSetChanged();
             }
         });

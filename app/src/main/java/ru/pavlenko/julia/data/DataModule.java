@@ -2,6 +2,9 @@ package ru.pavlenko.julia.data;
 
 import android.content.Context;
 
+import java.util.concurrent.Executors;
+
+import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
@@ -11,12 +14,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import ru.pavlenko.julia.BuildConfig;
 
 @Module
-public class DataModule {
+public interface DataModule {
 
     @Provides
     static HttpLoggingInterceptor httpLoggingInterceptor() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-        httpLoggingInterceptor.level(HttpLoggingInterceptor.Level.BODY);
+        httpLoggingInterceptor.level(HttpLoggingInterceptor.Level.HEADERS);
         return httpLoggingInterceptor;
     }
 
@@ -32,19 +35,19 @@ public class DataModule {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BuildConfig.CMC_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .callbackExecutor(Executors.newFixedThreadPool(4))
                 .client(okHttpClient)
                 .build();
 
         return retrofit.create(CoinMarketCapApi.class);
     }
 
-    @Provides
-    static CoinMarketCapRepository repository(CoinMarketCapApi api) {
-        return new CoinMarketCapRepositoryImpl(api);
-    }
+    @Binds
+    CoinRepository repository(CoinRepositoryImpl coinRepository);
 
-    @Provides
-    static Currency currency(Context context) {
-        return new CurrencyImpl(context);
-    }
+    @Binds
+    Currency currency(CurrencyImpl currency);
+
+    @Binds
+    DataConverter dataConverter(DataConverterImpl dataConverter);
 }

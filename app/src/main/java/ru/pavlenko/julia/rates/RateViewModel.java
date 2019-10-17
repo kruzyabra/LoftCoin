@@ -5,46 +5,35 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import ru.pavlenko.julia.data.Coin;
-import ru.pavlenko.julia.data.CoinMarketCapRepository;
+import javax.inject.Inject;
+
+import ru.pavlenko.julia.data.CoinRepository;
 import ru.pavlenko.julia.data.Currencies;
-import ru.pavlenko.julia.util.Consumer;
+import ru.pavlenko.julia.db.CoinEntity;
 
 public class RateViewModel extends ViewModel {
 
-    private CoinMarketCapRepository mRepository;
+    private CoinRepository mRepository;
 
-    private final MutableLiveData<List<Coin>> mCoins = new MutableLiveData<>();
-
-    private final MutableLiveData<String> mTitle = new MutableLiveData<>();
+    private final MutableLiveData<List<CoinEntity>> mCoinEntities = new MutableLiveData<>();
 
     private Currencies mCurrency;
 
-    public RateViewModel(CoinMarketCapRepository repository) {
+    @Inject
+    RateViewModel(CoinRepository repository) {
         mRepository = repository;
         mCurrency = Currencies.getDefault();
+
         refresh();
     }
 
     void refresh() {
-        mRepository.getListing(mCurrency.getCurrencySymbol(), new Consumer<List<Coin>>() {
-            @Override
-            public void apply(List<Coin> value) {
-                mCoins.postValue(value);
-            }
-        });
+        mRepository.refresh(mCurrency.getCurrencySymbol());
+        mCoinEntities.postValue(mRepository.listings());
     }
 
-    public void setCoins(List<Coin> coins) {
-        mCoins.postValue(coins);
-    }
-
-    public void setTitle(String title) {
-        mTitle.postValue(title);
-    }
-
-    public MutableLiveData<List<Coin>> getCoins() {
-        return mCoins;
+    public MutableLiveData<List<CoinEntity>> getCoinEntities() {
+        return mCoinEntities;
     }
 
     void updateCurrency(Currencies currency) {

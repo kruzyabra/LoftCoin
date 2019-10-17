@@ -23,12 +23,12 @@
         app:ci_drawable_unselected="@drawable/tab_indicator_default"
         app:layout_constraintBottom_toTopOf="@+id/welcome_button" />
 
-    <com.google.android.material.button.MaterialButton
+    <TextView
         android:id="@+id/welcome_button"
         android:layout_width="248dp"
         android:layout_height="64dp"
         app:cornerRadius="50dp"
-        android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:layout_marginBottom="64dp"
         android:background="@drawable/button_golden_yellow_watermelon"
         android:text="@string/welcome_button_text"

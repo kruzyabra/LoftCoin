@@ -11,7 +11,7 @@ import ru.pavlenko.julia.rates.RateFragment;
 import ru.pavlenko.julia.wallets.WalletFragment;
 
 @Module
-class MainModule {
+interface MainModule {
 
     @Provides
     static SparseArrayCompat<Fragment> fragments() {
